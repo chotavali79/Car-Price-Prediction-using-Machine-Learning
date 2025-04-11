@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🚗 Car Price Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            padding: 20px;
+            color: #333;
+        }
+        h2 {
+            color: #0055a5;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            background-color: #0055a5;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        .result {
+            background-color: #d1f7c4;
+            color: #222;
+            padding: 15px;
+            margin-top: 20px;
+            border-left: 6px solid #28a745;
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>🚗 Car Price Prediction</h2>
+    <form method="POST">
+        <label>Vehicle Age (years):</label>
+        <input type="number" name="vehicle_age" required>
+
+        <label>KMs Driven:</label>
+        <input type="number" name="km_driven" required>
+
+        <label>Mileage (kmpl):</label>
+        <input type="number" step="0.01" name="mileage" required>
+
+        <label>Engine (CC):</label>
+        <input type="number" name="engine" required>
+
+        <label>Max Power (BHP):</label>
+        <input type="number" step="0.1" name="max_power" required>
+
+        <label>Seats:</label>
+        <input type="number" name="seats" required>
+
+        <label>Fuel Type:</label>
+        <select name="fuel_type" required>
+            <option value="Petrol">Petrol</option>
+            <option value="Diesel">Diesel</option>
+        </select>
+
+        <label>Seller Type:</label>
+        <select name="seller_type" required>
+            <option value="Individual">Individual</option>
+            <option value="Dealer">Dealer</option>
+        </select>
+
+        <label>Transmission Type:</label>
+        <select name="transmission_type" required>
+            <option value="Manual">Manual</option>
+            <option value="Automatic">Automatic</option>
+        </select>
+
+        <label>Choose ML Model:</label>
+        <select name="model_type" required>
+            <option value="Random Forest">Random Forest</option>
+            <option value="Linear Regression">Linear Regression</option>
+            <option value="Gradient Boosting">Gradient Boosting</option>
+        </select>
+
+        <input type="submit" value="Predict Price 💰">
+    </form>
+
+    {% if prediction is not none %}
+    <div class="result">
+        💰 Predicted Selling Price: ₹{{ prediction }} Lakhs <br>
+        🤖 Model Used: {{ model_used }}
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <p class="error">Error: {{ error }}</p>
+    {% endif %}
+</body>
+</html>
